@@ -1,0 +1,16 @@
+<input type="checkbox" ng-model="filtering.pending"> Pending
+<input type="checkbox" ng-model="filtering.progress"> In progress
+<input type="checkbox" ng-model="filtering.accomplished"> Accomplished
+
+
+<div class="row">
+  <div class="col-md-3" ng-repeat="mission in missions | filter:isMissionDisplayed track by $index">
+    <div class="thumbnail">
+      <img ng-src="{{mission.photo}}">
+      <p>{{mission.name}}</p>
+      <p>{{mission.briefing}}</p>
+      <p>{{mission.status}}</p>
+      <p>Agents number: {{mission.agentsNumber}}</p>
+    </div>
+  </div>
+</div>

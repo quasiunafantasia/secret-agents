@@ -1,0 +1,22 @@
+<div class="col-md-3">
+      <div class="thumbnail">
+        <img ng-src="{{mission.photo}}">
+        <p>{{mission.name}}</p>
+        <p>{{mission.briefing}}</p>
+        <p>{{mission.status}}</p>
+        <p>Agents number: {{mission.agentsNumber}}</p>
+        <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+          <input type="text" ng-model="insertedAgent" placeholder="Select your agent" typeahead="freeAgent as freeAgent.name for freeAgent in freeAgents | filter:{name:$viewValue}" typeahead-template-url="app/missions/view/details/typeahead.html"> <button class="btn btn-default" ng-click="add()">Add</button>
+
+        </div>
+          <div class="col-md-3" ng-repeat="agent in mission.agents">
+            <div class="thumpnail">
+              <img ng-src="{{agent.phote}}">
+              <p>{{agent.name}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<button class="btn btn-default" ng-click="back()">Back</button>

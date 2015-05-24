@@ -11,7 +11,7 @@ var MissionSchema = new Schema({
     default: 'PENDING'
   },
   agentsNum: Number,
-  agents: [Schema.types.ObjectId]
+  agents: [Schema.Types.ObjectId]
 });
 
 module.exports = mongoose.model('Mission', MissionSchema);

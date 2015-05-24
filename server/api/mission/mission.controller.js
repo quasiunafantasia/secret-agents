@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var Mission = require('./mission.model');
-var Agent = require('./../agent.model');
+var Agent = require('./../agent/agent.model');
 
 // Get list of missions
 exports.index = function(req, res) {

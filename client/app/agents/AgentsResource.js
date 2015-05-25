@@ -28,6 +28,9 @@ angular.module('secretAgentsApp')
       },
       delete: function(id, params) {
         return createRes(id).delete(params);
+      },
+      getFreeAgents: function() {
+        return createRes().query({active: false});
       }
     }
 

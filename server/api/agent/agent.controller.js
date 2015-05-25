@@ -9,7 +9,7 @@ function writeData(err, data) {
 
 // Get list of agents
 exports.index = function(req, res) {
-  Agent.find(req.params, function (err, agents) {
+  Agent.find(req.query, function (err, agents) {
     if(err) { return handleError(res, err); }
     return res.json(200, agents);
   });

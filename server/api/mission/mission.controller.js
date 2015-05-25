@@ -6,7 +6,7 @@ var Agent = require('./../agent/agent.model');
 
 // Get list of missions
 exports.index = function(req, res) {
-  Mission.find(req.params, function (err, missions) {
+  Mission.find(req.query, function (err, missions) {
     if(err) { return handleError(res, err); }
     return res.json(200, missions);
   });

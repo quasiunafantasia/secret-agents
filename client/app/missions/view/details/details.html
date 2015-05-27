@@ -4,13 +4,13 @@
         <p>{{mission.name}}</p>
         <p>{{mission.briefing}}</p>
         <p>{{mission.status}}</p>
-        <p>Agents number: {{mission.agentsNumber}}</p>
+        <p>Agents: {{missionAgents.length}} / {{mission.agentsNum}}</p>
         <div class="row">
-        <div class="col-md-3 col-md-offset-1">
-          <input type="text" ng-model="insertedAgent" placeholder="Select your agent" typeahead="freeAgent as freeAgent.name for freeAgent in freeAgents | filter:{name:$viewValue}" typeahead-template-url="app/missions/view/details/typeahead.html"> <button class="btn btn-default" ng-click="add()">Add</button>
+        <div class="col-md-3 col-md-offset-1" ng-show="missionPending()">
+          <input type="text" ng-model="insertedAgent" placeholder="Select your agent" typeahead="freeAgent as freeAgent.name for freeAgent in freeAgents | filter:{name:$viewValue}" typeahead-template-url="app/missions/view/details/typeahead.html" ng-disabled="!addEnabled()"> <button class="btn btn-default" ng-click="add()" ng-disabled="!addEnabled()">Add</button>
 
         </div>
-          <div class="col-md-3" ng-repeat="agent in mission.agents">
+          <div class="col-md-3" ng-repeat="agent in missionAgents">
             <div class="thumpnail">
               <img ng-src="{{agent.phote}}">
               <p>{{agent.name}}</p>
@@ -19,4 +19,7 @@
         </div>
       </div>
     </div>
+
 <button class="btn btn-default" ng-click="back()">Back</button>
+<button class="btn btn-default" ng-click="startMission()" ng-show="missionPending()">Start Mission!</button>
+<button class="btn btn-default" ng-click="endMission()" ng-show="missionActive()">End Mission!</button>

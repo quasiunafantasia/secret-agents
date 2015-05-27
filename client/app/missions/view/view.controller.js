@@ -13,7 +13,13 @@ angular.module('secretAgentsApp')
     $scope.missionsDislpayed = function() {
       return $state.current.name === 'base.missions.view';
     };
+
     $scope.missions = MissionsResource.query();
+
+    $scope.$on('updateMission', function() {
+      $scope.missions = MissionsResource.query();
+
+    });
 
     $scope.isMissionDisplayed = function(mission) {
       var filteringExists = _($scope.filtering).any(function(val) {

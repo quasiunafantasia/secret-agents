@@ -72,6 +72,54 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.startMission = function(req, res) {
+  var agentIds = req.body.map(function(agent) {
+    return agent._id;
+  });
+  Mission.findById(req.params.id, function(err, mission) {
+    if (err) return handleError(res, err);
+    if (!mission) return res.send(404);
+    Agent.find({
+      '_id': {
+        $in: agentIds
+      }
+    }, function(err, agents) {
+      if(err) { return handleError(res, err); }
+      if(!agents) { return res.send(404); }
+      agents.forEach(function(agent) {
+        agent.active = true;
+        agent.save();
+      });
+      mission.status = 'IN PROGRESS';
+      mission.agents = agentIds;
+      mission.save();
+      res.json(200, mission);
+    });
+  });
+};
+
+exports.endMission = function(req, res) {
+  Mission.findById(req.params.id, function(err, mission) {
+    if (err) return handleError(res, err);
+    if (!mission) return res.send(404);
+    Agent.find({
+      '_id': {
+        $in: mission.agents
+      }
+    }, function(err, agents) {
+      if(err) { return handleError(res, err); }
+      if(!agents) { return res.send(404); }
+      agents.forEach(function(agent) {
+        agent.active = false;
+        agent.save();
+      });
+      mission.status = 'ACCOMPLISHED';
+      mission.save();
+      res.json(200, mission);
+    });
+  });
+};
+
 
 function handleError(res, err) {
   return res.send(500, err);

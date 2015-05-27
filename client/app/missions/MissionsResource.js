@@ -31,6 +31,12 @@ angular.module('secretAgentsApp')
       getAgents: function(id) {
         var res = $resource('/api/missions/:id/agents', {id: id});
         return res.query();
+      },
+      start: function(id, agents) {
+        return $resource('/api/missions/:id/start', {id: id}).save(agents);
+      },
+      end: function(id) {
+        return $resource('/api/missions/:id/end', {id: id}).save();
       }
     }
 

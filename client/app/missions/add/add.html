@@ -1,7 +1,7 @@
-<input type="text" class="form-control" placeholder="Agents photo" ng-model="agent.photo">
-<img ng-src="{{agent.src}}">
-<input type="text" class="form-control" placeholder="Agent`s name" ng-model="agent.src">
+<input type="text" class="form-control" placeholder="Mission Code Name" ng-model="mission.name">
 <br>
-<textarea class="form-control" rows="3" ng-model="agent.info" placeholder="Agent`s info"></textarea>
+<textarea class="form-control" rows="3" ng-model="mission.briefing" placeholder="Mission briefing"></textarea>
 <br>
+<input type="number" class="form-control" placeholder="Required Number of agents" ng-model="mission.agentsNum">
+
 <button class="btn btn-default" ng-click="add()">add</button>

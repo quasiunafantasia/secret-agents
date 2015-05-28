@@ -1,17 +1,21 @@
 <div ng-show="missionsDislpayed()">
-  <input type="checkbox" ng-model="filtering.pending"> Pending
-  <input type="checkbox" ng-model="filtering.progress"> In progress
-  <input type="checkbox" ng-model="filtering.accomplished"> Accomplished
-
-
-  <div class="row">
-    <div class="col-md-3" ng-repeat="mission in missions | filter:isMissionDisplayed track by $index" ui-sref="base.missions.view.details({mission:mission})" >
-      <div class="thumbnail">
-        <img ng-src="{{mission.photo}}">
-        <p>{{mission.name}}</p>
-        <p>{{mission.briefing}}</p>
-        <p>Mission Status: {{mission.status}}</p>
-        <p>Agents number: {{mission.agents.length}} / {{mission.agentsNum}}</p>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="form-group text-center">
+        <input type="checkbox" ng-model="filtering.pending"> Pending
+        <input type="checkbox" ng-model="filtering.progress"> In progress
+        <input type="checkbox" ng-model="filtering.accomplished"> Accomplished
+      </div>
+      <div class="row">
+        <div class="col-md-3" ng-repeat="mission in missions | filter:isMissionDisplayed track by $index" ui-sref="base.missions.view.details({mission:mission})" >
+          <div class="thumbnail text-center">
+            <img ng-src="{{mission.photo}}">
+            <p class="caption"><h3>{{mission.name}}</h3></p>
+            <p>{{mission.briefing}}</p>
+            <p>Mission Status: {{mission.status}}</p>
+            <p> <label>Agents number:</label>  <span class="badge">{{mission.agents.length}} / {{mission.agentsNum}}</span></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

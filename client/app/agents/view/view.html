@@ -1,9 +1,13 @@
-<div class="row">
-  <div class="col-md-3" ng-repeat="agent in agents track by $index">
-    <div class="thumbnail">
-      <img ng-src="{{agent.photo}}">
-      <p>{{agent.name}}</p>
-      <p>{{agent.info}}</p>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-2" ng-repeat="agent in agents track by $index">
+        <div class="thumbnail">
+          <img ng-src="{{agent.photo}}" class="img-circle photo">
+          <p>{{agent.name}}</p>
+          <p>{{agent.info}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

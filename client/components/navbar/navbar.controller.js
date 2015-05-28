@@ -20,4 +20,5 @@ angular.module('secretAgentsApp')
     $scope.isActive = function(route) {
       return route === $location.path();
     };
+
   });

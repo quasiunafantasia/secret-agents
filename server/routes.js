@@ -5,7 +5,7 @@
 'use strict';
 
 var errors = require('./components/errors');
-
+var auth = require('./auth/auth.service');
 module.exports = function(app) {
 
   app.use('/api/users', require('./api/user'));

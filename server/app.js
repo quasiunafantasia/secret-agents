@@ -6,6 +6,7 @@
 
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+var argv = require('yargs').argv;
 
 var express = require('express');
 var mongoose = require('mongoose');
@@ -24,8 +25,8 @@ require('./config/express')(app);
 require('./routes')(app);
 
 // Start server
-server.listen(config.port, config.ip, function () {
-  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+server.listen(argv.port || config.port, config.ip, function () {
+  console.log('Express server listening on %d, in %s mode', argv.port || config.port, app.get('env'));
 });
 
 // Expose app

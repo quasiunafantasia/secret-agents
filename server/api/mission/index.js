@@ -2,9 +2,10 @@
 
 var express = require('express');
 var controller = require('./mission.controller');
-
+var auth = require('./../../auth/auth.service');
 var router = express.Router();
 
+router.use(auth.isAuthenticated);
 router.get('/:id/agents', controller.showAgents);
 router.post('/:id/start', controller.startMission);
 router.post('/:id/end', controller.endMission);

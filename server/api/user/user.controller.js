@@ -4,6 +4,8 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var redisClient = require('../../redis').redisClient;
+var auth = require('../../auth/auth.service');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -30,6 +32,7 @@ exports.create = function (req, res, next) {
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
     var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+    redisClient.set(token, user._id);
     res.json({ token: token });
   });
 };
@@ -83,13 +86,15 @@ exports.changePassword = function(req, res, next) {
  * Get my info
  */
 exports.me = function(req, res, next) {
-  var userId = req.user._id;
-  User.findOne({
-    _id: userId
-  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
-    if (err) return next(err);
-    if (!user) return res.json(401);
-    res.json(user);
+  console.log('me mw');
+  auth.getIdByToken(req.headers, function(err, userId) {
+    User.findOne({
+      _id: userId
+    }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
+      if (err) return next(err);
+      if (!user) return res.json(401);
+      res.json(user);
+    });
   });
 };
 

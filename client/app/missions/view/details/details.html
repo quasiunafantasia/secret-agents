@@ -6,20 +6,22 @@
         <p>{{mission.status}}</p>
         <p>Agents: {{missionAgents.length}} / {{mission.agentsNum}}</p>
         <div class="row">
-        <div class="col-md-3 col-md-offset-1" ng-show="missionPending()">
-          <input type="text" ng-model="insertedAgent" placeholder="Select your agent" typeahead="freeAgent as freeAgent.name for freeAgent in freeAgents | filter:{name:$viewValue}" typeahead-template-url="app/missions/view/details/typeahead.html" ng-disabled="!addEnabled()"> <button class="btn btn-default" ng-click="add()" ng-disabled="!addEnabled()">Add</button>
+          <div class="col-md-3 col-md-offset-1" ng-show="missionPending()">
+            <input type="text" ng-model="insertedAgent" placeholder="Select your agent" typeahead="freeAgent as freeAgent.name for freeAgent in freeAgents | filter:{name:$viewValue}" typeahead-template-url="app/missions/view/details/typeahead.html" ng-disabled="!addEnabled()"> <button class="btn btn-default" ng-click="add()" ng-disabled="!addEnabled()">Add</button>
 
-        </div>
-          <div class="col-md-3" ng-repeat="agent in missionAgents">
-            <div class="thumpnail">
-              <img ng-src="{{agent.phote}}">
-              <p>{{agent.name}}</p>
-            </div>
+
           </div>
         </div>
+        <ul class="list-group">
+          <li ng-repeat="agent in missionAgents" class="list-group-item">
+            <img ng-src="{{agent.photo}}" class="img-circle photo">
+            <p>{{agent.name}}</p>
+            <span class="glyphicon glyphicon-trash" ng-click="removeAgent($index)" ng-show="missionPending()"></span>
+          </li>
+        </ul>
       </div>
     </div>
 
-<button class="btn btn-default" ng-click="back()">Back</button>
-<button class="btn btn-default" ng-click="startMission()" ng-show="missionPending()">Start Mission!</button>
-<button class="btn btn-default" ng-click="endMission()" ng-show="missionActive()">End Mission!</button>
+<button class="btn btn-info" ng-click="back()">Back</button>
+<button class="btn btn-success" ng-click="startMission()" ng-show="missionPending()">Start Mission!</button>
+<button class="btn btn-success" ng-click="endMission()" ng-show="missionActive()">End Mission!</button>
